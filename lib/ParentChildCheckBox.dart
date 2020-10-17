@@ -157,16 +157,18 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
   }
 
   _intitialchildrenValue() {
-    if (widget.childrenTitle.length !=
-        (childValue == null ? 0 : childValue.length)) {
-      childValue = [];
-      if (widget.childrenTitle != null)
+    if (widget.childrenTitle != null) {
+      if (widget.childrenTitle.length !=
+          (childValue == null ? 0 : childValue.length)) {
+        childValue = [];
+
         widget.childrenTitle.forEach((element) {
           childValue.add(ValueNotifier<bool>(
               (widget.childrenDefaultValue != null
                   ? widget.childrenDefaultValue
                   : false)));
         });
+      }
     }
   }
 
