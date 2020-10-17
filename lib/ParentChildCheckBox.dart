@@ -178,33 +178,38 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
     if (widget.onChange != null)
       widget.onChange(
         parentValue.value,
-        childValue.map((e) => e.value).toList(),
+        widget.childrenTitle == null
+            ? null
+            : childValue.map((e) => e.value).toList(),
       );
   }
 
   _checkChildrenValueToChangeParentValue() {
-    List<bool> _childrenValueAsListBool = [];
-    childValue.forEach((element) {
-      _childrenValueAsListBool.add(element.value);
-    });
-    if (widget.isTristate == null) {
-      if (_childrenValueAsListBool.every((element) => element == true))
-        parentValue.value = true;
-      else
-        parentValue.value = false;
-    } else {
-      if (widget.isTristate) {
+    if (widget.childrenTitle != null) {
+      List<bool> _childrenValueAsListBool = [];
+      childValue.forEach((element) {
+        _childrenValueAsListBool.add(element.value);
+      });
+      if (widget.isTristate == null) {
         if (_childrenValueAsListBool.every((element) => element == true))
           parentValue.value = true;
-        else if (_childrenValueAsListBool.every((element) => element == false))
-          parentValue.value = false;
         else
-          parentValue.value = null;
+          parentValue.value = false;
       } else {
-        if (_childrenValueAsListBool.every((element) => element == true))
-          parentValue.value = true;
-        else
-          parentValue.value = false;
+        if (widget.isTristate) {
+          if (_childrenValueAsListBool.every((element) => element == true))
+            parentValue.value = true;
+          else if (_childrenValueAsListBool
+              .every((element) => element == false))
+            parentValue.value = false;
+          else
+            parentValue.value = null;
+        } else {
+          if (_childrenValueAsListBool.every((element) => element == true))
+            parentValue.value = true;
+          else
+            parentValue.value = false;
+        }
       }
     }
   }
