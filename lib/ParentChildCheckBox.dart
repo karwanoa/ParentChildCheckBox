@@ -70,6 +70,7 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
     parentValue = ValueNotifier<bool>((widget.parentDefaultValue != null
         ? widget.parentDefaultValue
         : false));
+    _intitialchildrenValue();
   }
 
   @override
@@ -169,9 +170,7 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
     if (widget.onChange != null)
       widget.onChange(
         parentValue.value,
-        childValue == null
-            ? null
-            : childValue.map((e) => e.value).toList(),
+        childValue == null ? null : childValue.map((e) => e.value).toList(),
       );
   }
 
