@@ -67,29 +67,19 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
   @override
   void initState() {
     super.initState();
-    debugPrint('initState');
     parentValue = ValueNotifier<bool>((widget.parentDefaultValue != null
         ? widget.parentDefaultValue
         : false));
-    // _intitialchildrenValue();
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   debugPrint('didChangeDependencies');
-  // }
 
   @override
   void didUpdateWidget(covariant ParentChildCheckBox oldWidget) {
     super.didUpdateWidget(oldWidget);
     _intitialchildrenValue();
-    debugPrint('didUpdateWidget');
   }
 
   @override
   Widget build(BuildContext context) {
-    _intitialchildrenValue();
     return Column(
       children: [
         ValueListenableBuilder(
@@ -159,11 +149,12 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
   }
 
   _intitialchildrenValue() {
+    /// initializing [childValue] to a default value
+    /// if the [childValue] is already assigned value to it, it does not need anyupdates even so, didUpdateWidget called
     if (widget.childrenTitle != null) {
       if (widget.childrenTitle.length !=
           (childValue == null ? 0 : childValue.length)) {
         childValue = [];
-
         widget.childrenTitle.forEach((element) {
           childValue.add(ValueNotifier<bool>(
               (widget.childrenDefaultValue != null
@@ -178,7 +169,7 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
     if (widget.onChange != null)
       widget.onChange(
         parentValue.value,
-        widget.childrenTitle == null
+        childValue == null
             ? null
             : childValue.map((e) => e.value).toList(),
       );
