@@ -151,8 +151,10 @@ class _ParentChildCheckBoxState extends State<ParentChildCheckBox> {
   }
 
   _changechildrenValueFromParent({@required bool value}) {
-    for (int i = 0; i < widget.childrenTitle.length; i++) {
-      if (value != null) childValue[i].value = value;
+    if (widget.childrenTitle != null) {
+      for (int i = 0; i < widget.childrenTitle.length; i++) {
+        if (value != null) childValue[i].value = value;
+      }
     }
   }
 
