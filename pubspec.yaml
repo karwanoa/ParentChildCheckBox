@@ -1,4 +1,4 @@
-name: ParentChildCheckBox
+name: parent_child_checkbox
 description: A flutter package to create Checkboxe with Parent and child checkboxes
 version: 0.0.1
 author: Karwan Shatri
